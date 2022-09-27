@@ -18,7 +18,7 @@ public class EmbalagemService {
     }
     public EmbalagemModel cadastrarEmbalagem(EmbalagemModel embalagemModel){
         UsuarioModel usuario = embalagemModel.getUsuario();
-        usuario.setPontos(1500L);
+        usuario.setPontos(1500L + usuario.getPontos());
         embalagemModel.setUsuario(usuario);
         return embalagemRepository.save(embalagemModel);
     }
