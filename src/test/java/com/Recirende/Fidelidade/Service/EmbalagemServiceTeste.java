@@ -1,6 +1,7 @@
 package com.Recirende.Fidelidade.Service;
 
 import com.Recirende.Fidelidade.Controller.EmbalagemController;
+import com.Recirende.Fidelidade.Model.EmbalagemModel;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,9 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class EmbalagemServiceTeste {
      @Autowired
      private EmbalagemController embalagemController;
+
+     private EmbalagemModel embalagemModel;
      @Test
      public void CadastraTeste(){
-         embalagemController.cadastrarEmbalagem();
+         embalagemController.cadastrarEmbalagem(embalagemModel);
 
 
     }
