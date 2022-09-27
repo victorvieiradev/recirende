@@ -12,6 +12,9 @@ public class EmbalagemModel {
     private String marca;
     private String numeroDeSerie;
     private EstadoEnum localDeColeta;
+
+
+
     @ManyToOne
     private UsuarioModel usuario;
 

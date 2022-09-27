@@ -1,12 +1,11 @@
 package com.Recirende.Fidelidade.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,8 +23,11 @@ public class UsuarioModel {
     @Column
     private Long pontos;
 
-
+    @JsonIgnore //1
+    @OneToMany(mappedBy = "cpf", cascade = CascadeType.ALL)
+    private List<EmbalagemModel> embalagemModel;
 
 
 
 }
+1

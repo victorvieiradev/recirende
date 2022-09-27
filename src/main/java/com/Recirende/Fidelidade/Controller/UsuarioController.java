@@ -28,4 +28,6 @@ public class UsuarioController {
     public ResponseEntity<UsuarioModel> deletarUsuario(@PathVariable Long id){
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
     }
+
+
 }

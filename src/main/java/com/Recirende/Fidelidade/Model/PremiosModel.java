@@ -1,5 +1,6 @@
 package com.Recirende.Fidelidade.Model;
 
+import com.Recirende.Fidelidade.Model.enuns.PremioEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,5 +15,5 @@ public class PremiosModel {
     private Long id;
 
     @Column
-    private
+    private PremioEnum tipo;
 }
