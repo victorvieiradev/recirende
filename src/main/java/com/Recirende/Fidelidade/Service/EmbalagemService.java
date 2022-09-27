@@ -1,0 +1,27 @@
+package com.Recirende.Fidelidade.Service;
+
+import com.Recirende.Fidelidade.Model.EmbalagemModel;
+import com.Recirende.Fidelidade.Repository.EmbalagemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EmbalagemService {
+    @Autowired
+    private EmbalagemRepository embalagemRepository;
+    public List<EmbalagemModel> listarEmbalagens(){
+        return embalagemRepository.findAll();
+    }
+    public EmbalagemModel cadastrarEmbalagem(EmbalagemModel embalagemModel){
+        return embalagemRepository.save(embalagemModel);
+    }
+    public Optional<EmbalagemModel> buscarPorId(Long id){
+        return embalagemRepository.findById(id);
+    }
+    public void excluir(EmbalagemModel embalagemModel){
+        embalagemRepository.delete(embalagemModel);
+    }
+}
