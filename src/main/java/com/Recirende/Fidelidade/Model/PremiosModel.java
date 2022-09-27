@@ -16,4 +16,12 @@ public class PremiosModel {
 
     @Column
     private PremioEnum tipo;
+
+    @Column
+    private String nomePremio;
+
+    @Column
+    private Long valorPremio;
+
+
 }

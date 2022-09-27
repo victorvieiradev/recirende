@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "recirende")
+@Table(name = "usuario")
 public class UsuarioModel {
 
     @Id
@@ -27,7 +27,4 @@ public class UsuarioModel {
     @OneToMany(mappedBy = "cpf", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagemModel;
 
-    public void setPontos(Long pontos) {
-        this.pontos += pontos;
-    }
 }
