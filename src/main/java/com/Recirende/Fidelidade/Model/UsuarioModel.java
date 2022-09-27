@@ -27,6 +27,7 @@ public class UsuarioModel {
     @OneToMany(mappedBy = "cpf", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagemModel;
 
-
-
+    public void setPontos(Long pontos) {
+        this.pontos += pontos;
+    }
 }
