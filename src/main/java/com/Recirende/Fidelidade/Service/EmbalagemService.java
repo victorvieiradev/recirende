@@ -16,6 +16,7 @@ public class EmbalagemService {
         return embalagemRepository.findAll();
     }
     public EmbalagemModel cadastrarEmbalagem(EmbalagemModel embalagemModel){
+
         return embalagemRepository.save(embalagemModel);
     }
     public Optional<EmbalagemModel> buscarPorId(Long id){
