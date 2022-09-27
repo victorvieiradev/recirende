@@ -2,6 +2,7 @@ package com.Recirende.Fidelidade.Controller;
 
 import com.Recirende.Fidelidade.Model.EmbalagemModel;
 import com.Recirende.Fidelidade.Model.enuns.EstadoEnum;
+import com.Recirende.Fidelidade.Repository.EmbalagemRepository;
 import com.Recirende.Fidelidade.Service.EmbalagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,17 @@ import java.util.Optional;
 public class EmbalagemController {
     @Autowired
     private EmbalagemService embalagemService;
+    @Autowired
+    private EmbalagemRepository embalagemRepository;
     @GetMapping
     public ResponseEntity<List<EmbalagemModel>> listarEmbalagens(){
         return ResponseEntity.status(HttpStatus.OK).body(embalagemService.listarEmbalagens());
     }
     @PostMapping
     public ResponseEntity<?> cadastrarEmbalagem(@RequestBody EmbalagemModel embalagemModel){
+        if (embalagemRepository.existsByNumeroDeSerie(embalagemModel.getNumeroDeSerie())){
+         return ResponseEntity.status(HttpStatus.CONFLICT).body("Não é possível cadastrar embalagens com a mesma numeração de serie.");
+        }
         if (embalagemModel.getLocalDeColeta() != EstadoEnum.SP || embalagemModel.getLocalDeColeta() != EstadoEnum.MG ||
                 embalagemModel.getLocalDeColeta() != EstadoEnum.ES || embalagemModel.getLocalDeColeta() != EstadoEnum.DF){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Estado informado não possui local de coleta, apenas os estados: SP, MG, ES e DF são permitidos.");
