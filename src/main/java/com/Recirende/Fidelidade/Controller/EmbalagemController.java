@@ -1,6 +1,7 @@
 package com.Recirende.Fidelidade.Controller;
 
 import com.Recirende.Fidelidade.Model.EmbalagemModel;
+import com.Recirende.Fidelidade.Model.enuns.EstadoEnum;
 import com.Recirende.Fidelidade.Service.EmbalagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,11 @@ public class EmbalagemController {
         return ResponseEntity.status(HttpStatus.OK).body(embalagemService.listarEmbalagens());
     }
     @PostMapping
-    public ResponseEntity<EmbalagemModel> cadastrarEmbalagem(@RequestBody EmbalagemModel embalagemModel){
+    public ResponseEntity<?> cadastrarEmbalagem(@RequestBody EmbalagemModel embalagemModel){
+        if (embalagemModel.getLocalDeColeta() != EstadoEnum.SP || embalagemModel.getLocalDeColeta() != EstadoEnum.MG ||
+                embalagemModel.getLocalDeColeta() != EstadoEnum.ES || embalagemModel.getLocalDeColeta() != EstadoEnum.DF){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Estado informado não possui local de coleta, apenas os estados: SP, MG, ES e DF são permitidos.");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(embalagemService.cadastrarEmbalagem(embalagemModel));
     }
     @GetMapping(path = "{id}")
