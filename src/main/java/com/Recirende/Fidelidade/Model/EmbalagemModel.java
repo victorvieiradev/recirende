@@ -13,7 +13,8 @@ public class EmbalagemModel {
     private String numeroDeSerie;
     private EstadoEnum localDeColeta;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "usuario_cpf", referencedColumnName = "cpf", nullable = true)
     private UsuarioModel usuario;
 
 
