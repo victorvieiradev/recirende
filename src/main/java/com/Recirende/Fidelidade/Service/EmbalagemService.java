@@ -1,6 +1,7 @@
 package com.Recirende.Fidelidade.Service;
 
 import com.Recirende.Fidelidade.Model.EmbalagemModel;
+import com.Recirende.Fidelidade.Model.UsuarioModel;
 import com.Recirende.Fidelidade.Repository.EmbalagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ public class EmbalagemService {
         return embalagemRepository.findAll();
     }
     public EmbalagemModel cadastrarEmbalagem(EmbalagemModel embalagemModel){
-
+        UsuarioModel usuario = embalagemModel.getUsuario();
+        usuario.setPontos(1500L);
+        embalagemModel.setUsuario(usuario);
         return embalagemRepository.save(embalagemModel);
     }
     public Optional<EmbalagemModel> buscarPorId(Long id){
