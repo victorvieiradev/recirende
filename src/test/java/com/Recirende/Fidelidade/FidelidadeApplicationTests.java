@@ -13,10 +13,7 @@ class FidelidadeApplicationTests {
 
     @Test
     void cadastrarEmbralagem() {
-        UsuarioModel usuario = new UsuarioModel();
-        usuario.setPontos(1500l + usuario.getPontos());
-        embalagemModel.setUsuario(embalagemModel);
-        Assertions.assertArrayEquals(new );
+
 
 
     }
