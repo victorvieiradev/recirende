@@ -1,7 +1,10 @@
 package com.Recirende.Fidelidade.Service;
 
+import com.Recirende.Fidelidade.Model.PremiosModel;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
+import com.Recirende.Fidelidade.Repository.PremioRepository;
 import com.Recirende.Fidelidade.Repository.UsuarioRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -10,12 +13,15 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import java.rmi.NoSuchObjectException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
 
     @Autowired
-   private UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private PremioRepository premioRepository;
 
     public UsuarioModel cadastrarUsuario(UsuarioModel usuarioModel){
 
@@ -50,6 +56,21 @@ public class UsuarioService {
     }
         public List<UsuarioModel> mostrarTudo(){
         return usuarioRepository.findAll();
+        }
+
+        public void resgatarPremios(Long idPremio, String cpfUsuario){
+            Optional<PremiosModel> premiosModelOptional = premioRepository.findById(idPremio);
+            PremiosModel premiosModel = new PremiosModel();
+            BeanUtils.copyProperties(premiosModelOptional.get(), premiosModel);
+            Optional<UsuarioModel> usuarioModelOptional = usuarioRepository.findById(cpfUsuario);
+            UsuarioModel usuarioModel = new UsuarioModel();
+            BeanUtils.copyProperties(usuarioModelOptional.get(), usuarioModel);
+            usuarioModel.setPontos(usuarioModel.getPontos() - premiosModel.getValorPremio());
+            premioRepository.deleteById(idPremio);
+            usuarioRepository.save(usuarioModel);
+
+
+
         }
 
 }
