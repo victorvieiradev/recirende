@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UsuarioController extends ExceptionHandlerUsuario {
@@ -39,7 +40,7 @@ public class UsuarioController extends ExceptionHandlerUsuario {
     public List<UsuarioModel> mostrarTodos(){
         return usuarioService.mostrarTudo();
     }
-    @PutMapping(path = "/{idPremio}")
+    @PutMapping(path = "/usuario/{cpf}/premios/{idPremio}")
     public ResponseEntity<String> resgatarPremios(@PathVariable Long idPremio, @PathVariable String cpf){
         try {
             usuarioService.resgatarPremios(idPremio, cpf);
@@ -51,6 +52,8 @@ public class UsuarioController extends ExceptionHandlerUsuario {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
-    @GetMapping(path = "/usuario/{cpf}/premios")
+//    @GetMapping(path = "/usuario/{cpf}/premios")
+//    public ResponseEntity<Optional<UsuarioModel>> mostrarPremios(@PathVariable String id){
+//        return ResponseEntity.ok(usuarioService.mostrarResgatados(id));
+//    }
 }

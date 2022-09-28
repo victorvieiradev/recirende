@@ -1,6 +1,7 @@
 package com.Recirende.Fidelidade.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,11 +27,15 @@ public class UsuarioModel implements Serializable {
     private Long pontos = 0L;
 
     @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
     private List<PremiosModel> premios;
 
     @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagemModel;
+
+
 
 }

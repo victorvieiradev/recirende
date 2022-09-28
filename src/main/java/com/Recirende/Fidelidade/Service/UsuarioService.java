@@ -62,7 +62,10 @@ public class UsuarioService {
         }
         @Transactional
         public void resgatarPremios(Long idPremio, String cpfUsuario) throws ProdutoNaoEncontradoException, UsuarioNaoEncontradoException, PontosInsuficientesException {
+          // usuarioRepository.findById(cpfUsuario).get().getPremios().add(premioRepository.findById(idPremio));
+
             Optional<PremiosModel> premiosModelOptional = premioRepository.findById(idPremio);
+
             if (!premiosModelOptional.isPresent()){
                 throw new ProdutoNaoEncontradoException("O produto informado não existe.");
             }
@@ -78,17 +81,17 @@ public class UsuarioService {
                 throw new PontosInsuficientesException("Os seus pontos não são suficientes para resgatar o premio.");
             }
             usuarioModel.setPontos(usuarioModel.getPontos() - premiosModel.getValorPremio());
-            premioRepository.deleteById(idPremio);
+
+            usuarioModel.setPremios(usuarioModel.getPremios().addAll(premiosModel));
+
             usuarioRepository.save(usuarioModel);
-
+            premioRepository.deleteById(idPremio);
 
 
         }
 
-        public List<PremiosModel> mostrarResgatados(String cpf){
-        Optional<UsuarioModel> userX = usuarioRepository.findById(cpf);
-        return userX.get().getPremios();
-        }
+//        public Optional<UsuarioModel> mostrarResgatados(String cpf){;
+//        }
 
 
 }
