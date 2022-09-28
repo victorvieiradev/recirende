@@ -36,10 +36,6 @@ public class UsuarioController extends ExceptionHandlerUsuario {
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
     }
 
-    @GetMapping(path = "/usuario")
-    public List<UsuarioModel> mostrarTodos(){
-        return usuarioService.mostrarTudo();
-    }
     @PutMapping(path = "/usuario/{cpf}/premios/{idPremio}")
     public ResponseEntity<String> resgatarPremios(@PathVariable Long idPremio, @PathVariable String cpf){
         try {
@@ -52,8 +48,5 @@ public class UsuarioController extends ExceptionHandlerUsuario {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-//    @GetMapping(path = "/usuario/{cpf}/premios")
-//    public ResponseEntity<Optional<UsuarioModel>> mostrarPremios(@PathVariable String id){
-//        return ResponseEntity.ok(usuarioService.mostrarResgatados(id));
-//    }
+
 }

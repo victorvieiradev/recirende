@@ -1,22 +1,22 @@
 # recirende
 
-## Dcocumentação de uso da API Recirende.
+## Documentaï¿½ï¿½o de uso da API Recirende.
 
 ## Castrando usuarios.
 
-Para começa a trabalhar com a API, é necessario primeiro cadastrar um usuário.
+Para comeï¿½a a trabalhar com a API, ï¿½ necessario primeiro cadastrar um usuï¿½rio.
 
 {
 "cpf": "01030405061",
 "nome": "Joaquim"
 }
 
-Após ser cadastrado o usuario terá acesso à todas as requições padrão http como:
-GET, POST, PUT e DELET seguindo à URL padrão "/usuario".
+Apï¿½s ser cadastrado o usuario terï¿½ acesso ï¿½ todas as requiï¿½ï¿½es padrï¿½o http como:
+GET, POST, PUT e DELET seguindo ï¿½ URL padrï¿½o "/usuario".
 
 ## Cadastrando embalagem
 
-Observação, para cadastrar uma embalagem, primeiro você precisa ter um usuário cadastro no sistema.
+Observaï¿½ï¿½o, para cadastrar uma embalagem, primeiro vocï¿½ precisa ter um usuï¿½rio cadastro no sistema.
 
 O seguinte modelo abaixo cadastra uma embalagem:
 
@@ -32,13 +32,13 @@ O seguinte modelo abaixo cadastra uma embalagem:
 
 }
 
-Após cadastrar a embelagem você terá acesso a todos o métodos de requição:
-GET, POST, PUT e DELET seguindo à URL padrão "/embalagem".
+Apï¿½s cadastrar a embelagem vocï¿½ terï¿½ acesso a todos o mï¿½todos de requiï¿½ï¿½o:
+GET, POST, PUT e DELET seguindo ï¿½ URL padrï¿½o "/embalagem".
 
-## Cadastrando prêmio
+## Cadastrando prï¿½mio
 
-Para cadastrar um prêmio será necessário cadastrar uma embalagem e um usuário.
-O cadastro do prêmio segue o seguinte modelo abaixo.
+Para cadastrar um prï¿½mio serï¿½ necessï¿½rio cadastrar uma embalagem e um usuï¿½rio.
+O cadastro do prï¿½mio segue o seguinte modelo abaixo.
 
 {
 "tipo":"PRODUTOS",
@@ -50,26 +50,26 @@ O cadastro do prêmio segue o seguinte modelo abaixo.
     }
 }
 
-Observação: Se você já indicar o usuário na hora do cadastro do prêmio, o prêmio será atribuído ao usuario.
-Caso não queira indicar um premiado na hora do cadastrado, basta omitir o atributo "usuario".
+Observaï¿½ï¿½o: Se vocï¿½ jï¿½ indicar o usuï¿½rio na hora do cadastro do prï¿½mio, o prï¿½mio serï¿½ atribuï¿½do ao usuario.
+Caso nï¿½o queira indicar um premiado na hora do cadastrado, basta omitir o atributo "usuario".
 
-Após cadastrar o prêmop você terá acesso a todos o métodos de requição:
-GET, POST, PUT e DELET seguindo à URL padrão "/premio".
+Apï¿½s cadastrar o prï¿½mop vocï¿½ terï¿½ acesso a todos o mï¿½todos de requiï¿½ï¿½o:
+GET, POST, PUT e DELET seguindo ï¿½ URL padrï¿½o "/premio".
 
-Após a etapas acima serem feita corretamente, a API estará pronta para o uso. Lembrando que se houver um novo
-cadastrado, de uma nova embalagem e o corpo JASON for indicado o usuário responsável pela embalagem,
-automaticamente a sua pontuação terá um valor acrencentado 1500 ponto por cadastrado.
+Apï¿½s a etapas acima serem feita corretamente, a API estarï¿½ pronta para o uso. Lembrando que se houver um novo
+cadastrado, de uma nova embalagem e o corpo JASON for indicado o usuï¿½rio responsï¿½vel pela embalagem,
+automaticamente a sua pontuaï¿½ï¿½o terï¿½ um valor acrencentado 1500 ponto por cadastrado.
 
 ## Regastando Premio
 
-Para regatar um prêmio é preciso seguir todos os passos descrito acima.
-Observe que para retirar seu prêmio,você precisa ter uma pontuação maior ou igual ao valor do prêmio.
+Para regatar um prï¿½mio ï¿½ preciso seguir todos os passos descrito acima.
+Observe que para retirar seu prï¿½mio,vocï¿½ precisa ter uma pontuaï¿½ï¿½o maior ou igual ao valor do prï¿½mio.
 
-A URL padrão para solicitar a retirada do prêmio é: "/usuario/{cpf}/premio/{idPremio}",
-lembrando que a requisição é a do tipo PUT.
+A URL padrï¿½o para solicitar a retirada do prï¿½mio ï¿½: "/usuario/{cpf}/premio/{idPremio}",
+lembrando que a requisiï¿½ï¿½o ï¿½ a do tipo PUT.
 
-Note que sempre que você resgastar um prêmio, ele será automaticamente excluído da lista do prêmio cadastrado e a 
-pontuação do usuário que solicitou o resgate, será atualizada.
+Note que sempre que vocï¿½ resgastar um prï¿½mio, ele serï¿½ automaticamente excluï¿½do da lista do prï¿½mio cadastrado e a 
+pontuaï¿½ï¿½o do usuï¿½rio que solicitou o resgate, serï¿½ atualizada.
 
 
 
