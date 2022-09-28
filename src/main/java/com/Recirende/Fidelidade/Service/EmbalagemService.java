@@ -23,7 +23,7 @@ public class EmbalagemService {
     public EmbalagemModel cadastrarEmbalagem(EmbalagemModel embalagemModel){
 
         Long cpf = embalagemModel.getUsuario().getCpf();
-        Optional<?> usuarioModelOptional = embalagemRepository.findById(cpf);
+        Optional<?> usuarioModelOptional = usuarioRepository.findById(cpf);
         if (usuarioModelOptional.isPresent()){
             UsuarioModel usuarioModel = new UsuarioModel();
             BeanUtils.copyProperties(usuarioModelOptional, usuarioModel);
