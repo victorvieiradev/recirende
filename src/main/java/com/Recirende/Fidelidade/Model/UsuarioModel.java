@@ -36,7 +36,7 @@ public class UsuarioModel implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagemModel;
-    private String listaDePremios = "";
+    private String listaDePremios = "| ";
 
 
 
