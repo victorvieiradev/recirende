@@ -54,33 +54,6 @@ public class PremiosService {
         }
     }
 
-    public void resgatarPremios(Long idPremio, String cpfUsuario) throws ProdutoNaoEncontradoException, UsuarioNaoEncontradoException, PontosInsuficientesException {
-        // usuarioRepository.findById(cpfUsuario).get().getPremios().add(premioRepository.findById(idPremio));
 
-        Optional<PremiosModel> premiosModelOptional = premioRepository.findById(idPremio);
-
-        if (!premiosModelOptional.isPresent()){
-            throw new ProdutoNaoEncontradoException("O produto informado não existe.");
-        }
-        PremiosModel premiosModel = new PremiosModel();
-        BeanUtils.copyProperties(premiosModelOptional.get(), premiosModel);
-        Optional<UsuarioModel> usuarioModelOptional = usuarioRepository.findById(cpfUsuario);
-        if (!usuarioModelOptional.isPresent()){
-            throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
-        }
-        UsuarioModel usuarioModel = new UsuarioModel();
-        BeanUtils.copyProperties(usuarioModelOptional.get(), usuarioModel);
-        if (usuarioModel.getPontos()< premiosModel.getValorPremio()){
-            throw new PontosInsuficientesException("Os seus pontos não são suficientes para resgatar o premio.");
-        }
-        usuarioModel.setPontos(usuarioModel.getPontos() - premiosModel.getValorPremio());
-
-        usuarioModel.setPremios(usuarioRepository.findById(idPremio));
-
-        usuarioRepository.save(usuarioModel);
-        premioRepository.deleteById(idPremio);
-
-
-    }
 
 }
