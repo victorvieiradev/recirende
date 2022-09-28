@@ -1,5 +1,8 @@
 package com.Recirende.Fidelidade.Service;
 
+import com.Recirende.Fidelidade.Exception.PontosInsuficientesException;
+import com.Recirende.Fidelidade.Exception.ProdutoNaoEncontradoException;
+import com.Recirende.Fidelidade.Exception.UsuarioNaoEncontradoException;
 import com.Recirende.Fidelidade.Model.PremiosModel;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
 import com.Recirende.Fidelidade.Repository.PremioRepository;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import javax.transaction.Transactional;
 import java.rmi.NoSuchObjectException;
 import java.util.List;
 import java.util.Optional;
@@ -57,14 +61,23 @@ public class UsuarioService {
         public List<UsuarioModel> mostrarTudo(){
         return usuarioRepository.findAll();
         }
-
-        public void resgatarPremios(Long idPremio, String cpfUsuario){
+        @Transactional
+        public void resgatarPremios(Long idPremio, String cpfUsuario) throws ProdutoNaoEncontradoException, UsuarioNaoEncontradoException, PontosInsuficientesException {
             Optional<PremiosModel> premiosModelOptional = premioRepository.findById(idPremio);
+            if (!premiosModelOptional.isPresent()){
+                throw new ProdutoNaoEncontradoException("O produto informado não existe.");
+            }
             PremiosModel premiosModel = new PremiosModel();
             BeanUtils.copyProperties(premiosModelOptional.get(), premiosModel);
             Optional<UsuarioModel> usuarioModelOptional = usuarioRepository.findById(cpfUsuario);
+            if (!usuarioModelOptional.isPresent()){
+                throw new UsuarioNaoEncontradoException("Usuário não encontrado.");
+            }
             UsuarioModel usuarioModel = new UsuarioModel();
             BeanUtils.copyProperties(usuarioModelOptional.get(), usuarioModel);
+            if (usuarioModel.getPontos()< premiosModel.getValorPremio()){
+                throw new PontosInsuficientesException("Os seus pontos não são suficientes para resgatar o premio.");
+            }
             usuarioModel.setPontos(usuarioModel.getPontos() - premiosModel.getValorPremio());
             premioRepository.deleteById(idPremio);
             usuarioRepository.save(usuarioModel);
