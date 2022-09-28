@@ -82,9 +82,10 @@ public class UsuarioService {
                 throw new PontosInsuficientesException("Os seus pontos não são suficientes para resgatar o premio.");
             }
             usuarioModel.setPontos(usuarioModel.getPontos() - premiosModel.getValorPremio());
+            usuarioModel.setListaDePremios(usuarioModel.getListaDePremios() + ", " + premiosModel.getNomePremio());
             usuarioRepository.save(usuarioModel);
             premioRepository.save(premiosModel);
-            usuarioModel.setListaDePremios(Collections.singletonList(premiosModel.getNomePremio()));
+
 
         }
 

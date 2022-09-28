@@ -26,9 +26,6 @@ public class UsuarioModel implements Serializable {
     @Column
     private Long pontos = 0L;
 
-    @Column
-    private List<String> listaDePremios;
-
     @JsonIgnore
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
@@ -39,6 +36,7 @@ public class UsuarioModel implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagemModel;
+    private String listaDePremios;
 
 
 
