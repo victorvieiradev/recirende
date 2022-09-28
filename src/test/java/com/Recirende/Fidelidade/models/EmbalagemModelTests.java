@@ -11,8 +11,7 @@ public class EmbalagemModelTests {
         EmbalagemModel embalagem = new EmbalagemModel();
         embalagem.setNumeroDeSerie("123d");
         Assertions.assertEquals("123d", embalagem.getNumeroDeSerie());
-        embalagem.setId(1L);
-        Assertions.assertEquals(1L, embalagem.getId());
+        Assertions.assertEquals(1L, embalagem.getNumeroDeSerie());
         embalagem.setMarca("doritos");
         Assertions.assertEquals("doritos", embalagem.getMarca());
         embalagem.setLocalDeColeta(EstadoEnum.DF);

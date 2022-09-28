@@ -13,7 +13,7 @@ public class UsuarioModelTests {
     public void usuarioModelTests(){
         UsuarioModel usuario = new UsuarioModel();
         usuario.setNome("Ana");
-        usuario.setCpf(12312343221L);
+        usuario.setCpf("11111111111");
         usuario.setPontos(1500L);
         Assertions.assertEquals("Ana", usuario.getNome());
         Assertions.assertEquals(12312343221L, usuario.getCpf());
