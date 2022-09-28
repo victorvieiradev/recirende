@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "usuario")
 public class UsuarioModel implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column( unique = true)

@@ -33,8 +33,10 @@ public class UsuarioService {
         if (usuarioRepository.existsById(usuarioModel.getCpf())){
             return usuarioRepository.save(usuarioModel);
         } else {
-            throw new NoSuchObjectException("usuarioModel");
+            //throw new NoSuchObjectException("usuarioModel");
+            return null;
         }
+
     }
 
     public UsuarioModel deletarUsuario(String id){

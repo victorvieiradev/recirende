@@ -32,10 +32,8 @@ public class EmbalagemService {
         Optional<UsuarioModel> usuarioModelOptional = usuarioRepository.findById(cpf);
         if (usuarioModelOptional.isPresent()){
             UsuarioModel usuarioModel = new UsuarioModel();
-            BeanUtils.copyProperties(usuarioModelOptional, usuarioModel);
+            BeanUtils.copyProperties(usuarioModelOptional.get(), usuarioModel);
             usuarioModel.setPontos(1500L + usuarioModelOptional.get().getPontos());
-            usuarioModel.setNome(usuarioModelOptional.get().getNome());
-            usuarioModel.setCpf(cpf);
             var usuarioComPontos = usuarioRepository.save(usuarioModel);
 
 
