@@ -28,8 +28,8 @@ public class EmbalagemService {
             UsuarioModel usuarioModel = new UsuarioModel();
             BeanUtils.copyProperties(usuarioModelOptional, usuarioModel);
             usuarioModel.setPontos(1500L + usuarioModel.getPontos());
-            usuarioModel.setCpf(cpf);
             var usuarioComPontos = usuarioRepository.save(usuarioModel);
+            embalagemModel.setUsuario(usuarioComPontos);
         }
         return embalagemRepository.save(embalagemModel);
     }
