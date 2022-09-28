@@ -5,26 +5,27 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "usuario")
-public class UsuarioModel {
+public class UsuarioModel implements Serializable {
 
     @Id
-    @Column(nullable = false, unique = true)
+    @Column( unique = true)
     @Size(min = 11, max = 11)
-    private Long cpf;
+    private String cpf;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
     @Column
     private Long pontos;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
     private List<PremiosModel> premios;
 
     @JsonIgnore

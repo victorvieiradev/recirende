@@ -1,5 +1,6 @@
 package com.Recirende.Fidelidade.Controller;
 
+import com.Recirende.Fidelidade.Exception.ExceptionHandlerUsuario;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
 import com.Recirende.Fidelidade.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-public class UsuarioController {
+public class UsuarioController extends ExceptionHandlerUsuario {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -25,9 +28,13 @@ public class UsuarioController {
     }
 
     @DeleteMapping(path = "/usuario/{id}")
-    public ResponseEntity<UsuarioModel> deletarUsuario(@PathVariable Long id){
+    public ResponseEntity<UsuarioModel> deletarUsuario(@PathVariable String id){
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
     }
 
+    @GetMapping(path = "/usuario")
+    public List<UsuarioModel> mostrarTodos(){
+        return usuarioService.mostrarTudo();
+    }
 
 }

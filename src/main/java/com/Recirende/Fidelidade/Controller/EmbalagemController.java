@@ -28,14 +28,15 @@ public class EmbalagemController {
         if (embalagemRepository.existsByNumeroDeSerie(embalagemModel.getNumeroDeSerie())){
          return ResponseEntity.status(HttpStatus.CONFLICT).body("Não é possível cadastrar embalagens com a mesma numeração de serie.");
         }
-        if (embalagemModel.getLocalDeColeta() != EstadoEnum.SP || embalagemModel.getLocalDeColeta() != EstadoEnum.MG ||
-                embalagemModel.getLocalDeColeta() != EstadoEnum.ES || embalagemModel.getLocalDeColeta() != EstadoEnum.DF){
+        if (embalagemModel.getLocalDeColeta() != EstadoEnum.SP && embalagemModel.getLocalDeColeta() != EstadoEnum.MG &&
+                embalagemModel.getLocalDeColeta() != EstadoEnum.ES && embalagemModel.getLocalDeColeta() != EstadoEnum.DF){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O Estado informado não possui local de coleta, apenas os estados: SP, MG, ES e DF são permitidos.");
         }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(embalagemService.cadastrarEmbalagem(embalagemModel));
     }
     @GetMapping(path = "{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable(value = "id") Long id){
+    public ResponseEntity<?> buscarPorId(@PathVariable(value = "id") String id){
         Optional<EmbalagemModel> embalagemModelOptional = embalagemService.buscarPorId(id);
         if (embalagemModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A embalagem não foi cadastrada.");
@@ -43,7 +44,7 @@ public class EmbalagemController {
         return ResponseEntity.status(HttpStatus.OK).body(embalagemModelOptional.get());
     }
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<String> excluir(@PathVariable(value = "id") Long id){
+    public ResponseEntity<String> excluir(@PathVariable(value = "id") String id){
         Optional<EmbalagemModel> embalagemModelOptional = embalagemService.buscarPorId(id);
         if (embalagemModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A Embalagem solicitada para ser excluída não está cadastrada.");
@@ -52,12 +53,12 @@ public class EmbalagemController {
         return ResponseEntity.status(HttpStatus.OK).body("A embalagem foi excluída com sucesso!");
     }
     @PutMapping(path = "{id}")
-    public ResponseEntity<?> atualizarEmbalagem(@RequestBody @PathVariable EmbalagemModel embalagemModel, Long id){
+    public ResponseEntity<?> atualizarEmbalagem(@RequestBody @PathVariable EmbalagemModel embalagemModel, String id){
         Optional<EmbalagemModel> embalagemModelOptional = embalagemService.buscarPorId(id);
         if (embalagemModelOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A embalagem solicitada para ser atualizada não existe.");
         }
-        embalagemModel.setId(embalagemModelOptional.get().getId());
+
         return ResponseEntity.status(HttpStatus.OK).body(embalagemService.cadastrarEmbalagem(embalagemModel));
     }
 

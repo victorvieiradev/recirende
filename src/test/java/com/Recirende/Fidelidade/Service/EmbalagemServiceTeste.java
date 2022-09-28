@@ -2,24 +2,23 @@ package com.Recirende.Fidelidade.Service;
 
 import com.Recirende.Fidelidade.Controller.EmbalagemController;
 import com.Recirende.Fidelidade.Model.EmbalagemModel;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.annotation.Testable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+import static java.nio.file.Paths.get;
+import static org.mockito.Mockito.when;
 
-public class EmbalagemServiceTeste {
-     @Autowired
-     private EmbalagemController embalagemController;
-
-     private EmbalagemModel embalagemModel;
-     @Test
-     public void CadastraTeste(){
-         embalagemController.cadastrarEmbalagem(embalagemModel);
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class EmbalagemServiceTeste  {
 
 
-    }
 }

@@ -25,7 +25,7 @@ public class PremiosModel {
 
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "usuario", referencedColumnName = "cpf", nullable = true)
-    private UsuarioModel usuario;
+    @JoinColumn(name = "usuario1", referencedColumnName = "cpf")
+    private UsuarioModel usuario1;
 
 }

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmbalagemRepository extends JpaRepository<EmbalagemModel, Long> {
+public interface EmbalagemRepository extends JpaRepository<EmbalagemModel, String> {
     boolean existsByNumeroDeSerie(String numeroDeSerie);
 }
