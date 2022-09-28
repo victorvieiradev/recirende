@@ -1,6 +1,9 @@
 package com.Recirende.Fidelidade.Controller;
 
 import com.Recirende.Fidelidade.Exception.ExceptionHandlerUsuario;
+import com.Recirende.Fidelidade.Exception.PontosInsuficientesException;
+import com.Recirende.Fidelidade.Exception.ProdutoNaoEncontradoException;
+import com.Recirende.Fidelidade.Exception.UsuarioNaoEncontradoException;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
 import com.Recirende.Fidelidade.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +39,18 @@ public class UsuarioController extends ExceptionHandlerUsuario {
     public List<UsuarioModel> mostrarTodos(){
         return usuarioService.mostrarTudo();
     }
+    @PutMapping(path = "/{idPremio}")
+    public ResponseEntity<String> resgatarPremios(@PathVariable Long idPremio, @PathVariable String cpf){
+        try {
+            usuarioService.resgatarPremios(idPremio, cpf);
+            return ResponseEntity.status(HttpStatus.OK).body("Operação realizada com sucesso.");
+        } catch (ProdutoNaoEncontradoException | UsuarioNaoEncontradoException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 
+        } catch (PontosInsuficientesException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/usuario/{cpf}/premios")
 }

@@ -4,7 +4,9 @@ import com.Recirende.Fidelidade.Controller.EmbalagemController;
 import com.Recirende.Fidelidade.Model.EmbalagemModel;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,22 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class EmbalagemServiceTeste  {
+
+
+    @LocalServerPort //verificar porta
+    private int port;//procura por ela sendo 8080 ou 8081
+    @Autowired
+    private EmbalagemService service;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void retornarMensagem() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/usuarios",
+                String.class)).contains("");//não ha nada no controller
+    }
+
 
 
 }
