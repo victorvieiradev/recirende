@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
-import java.rmi.NoSuchObjectException;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,5 +84,11 @@ public class UsuarioService {
 
 
         }
+
+        public List<PremiosModel> mostrarResgatados(String cpf){
+        Optional<UsuarioModel> userX = usuarioRepository.findById(cpf);
+        return userX.get().getPremios();
+        }
+
 
 }

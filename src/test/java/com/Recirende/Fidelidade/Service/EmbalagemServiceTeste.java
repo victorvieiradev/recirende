@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.Recirende.Fidelidade.Model.UsuarioModel;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,8 +32,9 @@ public class EmbalagemServiceTeste  {
     private TestRestTemplate restTemplate;
 
     @Test
-    void verificaSeVemVazio() throws Exception{
-        Assertions.assertThat(service).isNotNull();
+    public void retornarMensagem() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/usuarios",
+                String.class)).contains("");//não ha nada no controller
     }
 
 

@@ -39,7 +39,7 @@ public class UsuarioController extends ExceptionHandlerUsuario {
     public List<UsuarioModel> mostrarTodos(){
         return usuarioService.mostrarTudo();
     }
-    @PutMapping(path = "/usuario/{cpf}/premios/{idPremio}")
+    @PutMapping(path = "/{idPremio}")
     public ResponseEntity<String> resgatarPremios(@PathVariable Long idPremio, @PathVariable String cpf){
         try {
             usuarioService.resgatarPremios(idPremio, cpf);
@@ -52,4 +52,5 @@ public class UsuarioController extends ExceptionHandlerUsuario {
         }
     }
 
+    @GetMapping(path = "/usuario/{cpf}/premios")
 }
