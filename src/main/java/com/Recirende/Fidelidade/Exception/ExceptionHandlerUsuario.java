@@ -13,6 +13,8 @@ import org.springframework.web.client.HttpServerErrorException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import java.rmi.NoSuchObjectException;
+import java.rmi.ServerException;
+import java.util.NoSuchElementException;
 
 public class ExceptionHandlerUsuario {
 
@@ -28,9 +30,14 @@ public class ExceptionHandlerUsuario {
         return new ResponseEntity<>("Formatação invalida! Revise os campos...", HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler(NoSuchObjectException.class)
-    public ResponseEntity<String> objetoInexistente(NoSuchObjectException noSuchObjectException, HttpServletRequest httpServletRequest){
-        return new ResponseEntity<>("Objeto n]ao encontrado", HttpStatus.NO_CONTENT);
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> objetoInexistente(NoSuchElementException noSuchObjectException, HttpServletRequest httpServletRequest){
+        return new ResponseEntity<>("Objeto não encontrado", HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
+    @ExceptionHandler(ServerException.class)
+    public ResponseEntity<String> ListaVazia(ServerException serverException, HttpServletRequest httpServletRequest){
+        return new ResponseEntity<>("Sua lista esta vazia", HttpStatus.NO_CONTENT);
     }
 
 }

@@ -23,7 +23,7 @@ public class UsuarioModel implements Serializable {
     private String nome;
 
     @Column
-    private Long pontos;
+    private Long pontos = 0L;
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
