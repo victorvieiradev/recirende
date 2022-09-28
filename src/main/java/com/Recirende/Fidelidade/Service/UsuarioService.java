@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,17 +82,11 @@ public class UsuarioService {
                 throw new PontosInsuficientesException("Os seus pontos não são suficientes para resgatar o premio.");
             }
             usuarioModel.setPontos(usuarioModel.getPontos() - premiosModel.getValorPremio());
-
-            usuarioModel.setPremios(usuarioModel.getPremios().addAll(premiosModel));
-
             usuarioRepository.save(usuarioModel);
-            premioRepository.deleteById(idPremio);
-
+            premioRepository.save(premiosModel);
+            usuarioModel.setListaDePremios(Collections.singletonList(premiosModel.getNomePremio()));
 
         }
-
-//        public Optional<UsuarioModel> mostrarResgatados(String cpf){;
-//        }
 
 
 }
