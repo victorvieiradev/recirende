@@ -22,11 +22,13 @@ public class UsuarioModel {
 
     @Column
     private Long pontos;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<PremiosModel> premios;
 
-    @JsonIgnore //1
-    @OneToMany(mappedBy = "cpf", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagemModel;
 
 }
