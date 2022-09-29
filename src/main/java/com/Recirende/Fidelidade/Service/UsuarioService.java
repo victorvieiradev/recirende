@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class UsuarioService {
         if (usuarioRepository.existsById(usuarioModel.getCpf())){
             return usuarioRepository.save(usuarioModel);
         } else {
-            //throw new NoSuchObjectException("usuarioModel");
+
             return null;
         }
 
@@ -59,6 +58,20 @@ public class UsuarioService {
 
     }
 
+
+    public List<UsuarioModel> mostrarUsuarios(){
+        if (usuarioRepository.findAll().isEmpty()){
+            throw new NullPointerException();
+        }else
+        return usuarioRepository.findAll();
+    }
+
+    public Optional<UsuarioModel> buscarPorId(String cpf){
+        if (usuarioRepository.existsById(cpf)){
+        return usuarioRepository.findById(cpf);
+        }else
+            throw new NullPointerException();
+    }
         @Transactional
         public void resgatarPremios(Long idPremio, String cpfUsuario) throws ProdutoNaoEncontradoException, UsuarioNaoEncontradoException, PontosInsuficientesException {
             Optional<PremiosModel> premiosModelOptional = premioRepository.findById(idPremio);
@@ -85,6 +98,8 @@ public class UsuarioService {
 
 
         }
+
+
 
 
 }

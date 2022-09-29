@@ -36,6 +36,16 @@ public class UsuarioController extends ExceptionHandlerUsuario {
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
     }
 
+    @GetMapping(path = "/usuario")
+    public ResponseEntity<List<UsuarioModel>> mostrarTodos(){
+        return ResponseEntity.ok(usuarioService.mostrarUsuarios());
+    }
+
+    @GetMapping(path = "/usuario/{cpf}")
+    public ResponseEntity<Optional<UsuarioModel>> mostrarPorId(@PathVariable String cpf){
+        return ResponseEntity.ok(usuarioService.buscarPorId(cpf));
+    }
+
     @PutMapping(path = "/usuario/{cpf}/premios/{idPremio}")
     public ResponseEntity<String> resgatarPremios(@PathVariable Long idPremio, @PathVariable String cpf){
         try {
