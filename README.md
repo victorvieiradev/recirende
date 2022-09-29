@@ -1,22 +1,22 @@
 # recirende
 
-## Documenta��o de uso da API Recirende.
+## Documentações de uso da API Recirende.
 
 ## Castrando usuarios.
 
-Para come�a a trabalhar com a API, � necessario primeiro cadastrar um usu�rio.
+Para começa a trabalhar com a API, é necessario primeiro cadastrar um usuário.
 
 {
 "cpf": "01030405061",
 "nome": "Joaquim"
 }
 
-Ap�s ser cadastrado o usuario ter� acesso � todas as requi��es padr�o http como:
-GET, POST, PUT e DELET seguindo � URL padr�o "/usuario".
+Após ser cadastrado o usuario terá acesso a todas as requisiçôes padrão http como:
+GET, POST, PUT, DELET e terá acesso ao GET por CPF seguindo a URL padrão "/usuario".
 
 ## Cadastrando embalagem
 
-Observa��o, para cadastrar uma embalagem, primeiro voc� precisa ter um usu�rio cadastro no sistema.
+Observaçõeso, para cadastrar uma embalagem, primeiro você precisa ter um usuário cadastro no sistema.
 
 O seguinte modelo abaixo cadastra uma embalagem:
 
@@ -32,13 +32,13 @@ O seguinte modelo abaixo cadastra uma embalagem:
 
 }
 
-Ap�s cadastrar a embelagem voc� ter� acesso a todos o m�todos de requi��o:
-GET, POST, PUT e DELET seguindo � URL padr�o "/embalagem".
+Após cadastrar a embelagem você terá acesso a todos o métodos de requisições:
+GET, POST, PUT e DELET seguindo a URL padrão "/embalagem".
 
-## Cadastrando pr�mio
+## Cadastrando prêmio
 
-Para cadastrar um pr�mio ser� necess�rio cadastrar uma embalagem e um usu�rio.
-O cadastro do pr�mio segue o seguinte modelo abaixo.
+Para cadastrar um prêmio será necessário cadastrar uma embalagem e um usuário.
+O cadastro do prêmio segue o seguinte modelo abaixo.
 
 {
 "tipo":"PRODUTOS",
@@ -50,26 +50,26 @@ O cadastro do pr�mio segue o seguinte modelo abaixo.
     }
 }
 
-Observa��o: Se voc� j� indicar o usu�rio na hora do cadastro do pr�mio, o pr�mio ser� atribu�do ao usuario.
-Caso n�o queira indicar um premiado na hora do cadastrado, basta omitir o atributo "usuario".
+Observação: Se você já indicar o usuário na hora do cadastro do prêmio, o prêmio será atribuído ao usuario.
+Caso não queira indicar um premiado na hora do cadastrado, basta omitir o atributo "usuario".
 
-Ap�s cadastrar o pr�mop voc� ter� acesso a todos o m�todos de requi��o:
-GET, POST, PUT e DELET seguindo � URL padr�o "/premio".
+Após cadastrar o prêmop você terá acesso a todos o métodos de requições:
+GET, POST, PUT e DELET seguindo a URL padrão "/premio".
 
-Ap�s a etapas acima serem feita corretamente, a API estar� pronta para o uso. Lembrando que se houver um novo
-cadastrado, de uma nova embalagem e o corpo JASON for indicado o usu�rio respons�vel pela embalagem,
-automaticamente a sua pontua��o ter� um valor acrencentado 1500 ponto por cadastrado.
+Após a etapas acima serem feita corretamente, a API estará pronta para o uso. Lembrando que se houver um novo
+cadastrado, de uma nova embalagem e o corpo JASON for indicado o usuário responsável pela embalagem,
+automaticamente a sua pontuação terá um valor acrencentado 1500 ponto por cadastrado.
 
 ## Regastando Premio
 
-Para regatar um pr�mio � preciso seguir todos os passos descrito acima.
-Observe que para retirar seu pr�mio,voc� precisa ter uma pontua��o maior ou igual ao valor do pr�mio.
+Para regatar um prêmio a preciso seguir todos os passos descrito acima.
+Observe que para retirar seu prêmio,você precisa ter uma pontuação maior ou igual ao valor do prêmio.
 
-A URL padr�o para solicitar a retirada do pr�mio �: "/usuario/{cpf}/premio/{idPremio}",
-lembrando que a requisi��o � a do tipo PUT.
+A URL padrão para solicitar a retirada do prêmio é: "/usuario/{cpf}/premio/{idPremio}",
+lembrando que a requisiçãoo é a do tipo PUT.
 
-Note que sempre que voc� resgastar um pr�mio, ele ser� automaticamente exclu�do da lista do pr�mio cadastrado e a 
-pontua��o do usu�rio que solicitou o resgate, ser� atualizada.
+Note que sempre que você resgastar um prêmio, ele será automaticamente excluído da lista do prêmio cadastrado e a 
+pontuação do usuário que solicitou o resgate, será atualizada.
 
 
 
