@@ -1,5 +1,6 @@
 package com.Recirende.Fidelidade.Controller;
 
+import com.Recirende.Fidelidade.Exception.ExceptionHandlerPremios;
 import com.Recirende.Fidelidade.Model.PremiosModel;
 import com.Recirende.Fidelidade.Service.PremiosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +8,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class PremioController {
+public class PremioController extends ExceptionHandlerPremios {
 
     @Autowired
     private PremiosService premiosService;
 
     @PostMapping(path = "/premios")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PremiosModel> cadastrarPremios(@RequestBody PremiosModel premiosModel){
+    public ResponseEntity<PremiosModel> cadastrarPremios(@RequestBody @Valid PremiosModel premiosModel){
         return ResponseEntity.ok(premiosService.cadastrarPremio(premiosModel));
     }
 
