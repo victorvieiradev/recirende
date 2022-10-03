@@ -13,12 +13,13 @@ import java.io.Serializable;
 public class EmbalagemModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
-    @Column
-    private String marca;
     @Id
     @Column
     private String numeroDeSerie;
+
+    @Column
+    private String marca;
+
     @Column
     private EstadoEnum localDeColeta;
 

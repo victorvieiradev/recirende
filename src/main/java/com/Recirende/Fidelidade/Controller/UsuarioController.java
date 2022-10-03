@@ -5,6 +5,7 @@ import com.Recirende.Fidelidade.Exception.PontosInsuficientesException;
 import com.Recirende.Fidelidade.Exception.ProdutoNaoEncontradoException;
 import com.Recirende.Fidelidade.Exception.UsuarioNaoEncontradoException;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
+import com.Recirende.Fidelidade.Model.UsuarioResponse;
 import com.Recirende.Fidelidade.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,33 +21,33 @@ public class UsuarioController extends ExceptionHandlerUsuario {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping(path = "/usuario")
+    @PostMapping(path = "/usuarios")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody UsuarioModel usuarioModel){
+    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@RequestBody UsuarioModel usuarioModel){
     return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuarioModel));
     }
 
-    @PutMapping(path = "/usuario/{id}")
+    @PutMapping(path = "/usuarios/{id}")
     public ResponseEntity<UsuarioModel> atualizarUsuario(@RequestBody UsuarioModel usuarioModel, @PathVariable Long id){
         return ResponseEntity.ok(usuarioService.atualizarUsuario(usuarioModel));
     }
 
-    @DeleteMapping(path = "/usuario/{id}")
+    @DeleteMapping(path = "/usuarios/{id}")
     public ResponseEntity<UsuarioModel> deletarUsuario(@PathVariable String id){
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
     }
 
-    @GetMapping(path = "/usuario")
+    @GetMapping(path = "/usuarios")
     public ResponseEntity<List<UsuarioModel>> mostrarTodos(){
         return ResponseEntity.ok(usuarioService.mostrarUsuarios());
     }
 
-    @GetMapping(path = "/usuario/{cpf}")
+    @GetMapping(path = "/usuarios/{cpf}")
     public ResponseEntity<Optional<UsuarioModel>> mostrarPorId(@PathVariable String cpf){
         return ResponseEntity.ok(usuarioService.buscarPorId(cpf));
     }
 
-    @PutMapping(path = "/usuario/{cpf}/premios/{idPremio}")
+    @PutMapping(path = "/usuarios/{cpf}/premios/{idPremio}")
     public ResponseEntity<String> resgatarPremios(@PathVariable Long idPremio, @PathVariable String cpf){
         try {
             usuarioService.resgatarPremios(idPremio, cpf);

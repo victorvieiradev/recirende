@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/embalagem")
+@RequestMapping(path = "/embalagens")
 public class EmbalagemController {
     @Autowired
     private EmbalagemService embalagemService;
@@ -35,7 +35,7 @@ public class EmbalagemController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(embalagemService.cadastrarEmbalagem(embalagemModel));
     }
-    @GetMapping(path = "{id}")
+    @GetMapping(path = "{cpf}")
     public ResponseEntity<?> buscarPorId(@PathVariable(value = "id") String id){
         Optional<EmbalagemModel> embalagemModelOptional = embalagemService.buscarPorId(id);
         if (embalagemModelOptional.isEmpty()){
@@ -43,7 +43,7 @@ public class EmbalagemController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(embalagemModelOptional.get());
     }
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/{cpf}")
     public ResponseEntity<String> excluir(@PathVariable(value = "id") String id){
         Optional<EmbalagemModel> embalagemModelOptional = embalagemService.buscarPorId(id);
         if (embalagemModelOptional.isEmpty()){
@@ -52,7 +52,7 @@ public class EmbalagemController {
         embalagemService.excluir(embalagemModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("A embalagem foi excluída com sucesso!");
     }
-    @PutMapping(path = "{id}")
+    @PutMapping(path = "{cpf}")
     public ResponseEntity<?> atualizarEmbalagem(@RequestBody @PathVariable EmbalagemModel embalagemModel, String id){
         Optional<EmbalagemModel> embalagemModelOptional = embalagemService.buscarPorId(id);
         if (embalagemModelOptional.isEmpty()){

@@ -5,6 +5,7 @@ import com.Recirende.Fidelidade.Exception.ProdutoNaoEncontradoException;
 import com.Recirende.Fidelidade.Exception.UsuarioNaoEncontradoException;
 import com.Recirende.Fidelidade.Model.PremiosModel;
 import com.Recirende.Fidelidade.Model.UsuarioModel;
+import com.Recirende.Fidelidade.Model.UsuarioResponse;
 import com.Recirende.Fidelidade.Repository.PremioRepository;
 import com.Recirende.Fidelidade.Repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
@@ -26,12 +27,17 @@ public class UsuarioService {
     @Autowired
     private PremioRepository premioRepository;
 
-    public UsuarioModel cadastrarUsuario(UsuarioModel usuarioModel){
+    public UsuarioResponse cadastrarUsuario(UsuarioModel usuarioModel){
 
         if (usuarioRepository.existsById(usuarioModel.getCpf())){
             throw new DuplicateKeyException(usuarioModel.getCpf());
         } else {
-            return usuarioRepository.save(usuarioModel);
+            usuarioRepository.save(usuarioModel);
+            UsuarioResponse usuarioResponse = new UsuarioResponse();
+            usuarioResponse.setCpf(usuarioModel.getCpf());
+            usuarioResponse.setNome(usuarioModel.getNome());
+
+            return usuarioResponse;
         }
     }
 
